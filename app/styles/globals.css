@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+:root {
+  --purple-primary: #8B5CF6;
+  --purple-light: #A78BFA;
+  --purple-dark: #7C3AED;
+  --saffron-orange: #FF9933;
+  --saffron-light: #FFB366;
+  --saffron-dark: #E6851A;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-900: #111827;
+  --white: #FFFFFF;
+  --brand-gradient: linear-gradient(90deg, #8B5CF6 0%, #FF9933 100%);
+  --background: #F9FAFB;
+}
+.theme-labs {
+  --purple-primary: #0ea5e9;
+  --purple-light: #38bdf8;
+  --purple-dark: #0369a1;
+  --saffron-orange: #22d3ee;
+  --saffron-light: #67e8f9;
+  --saffron-dark: #0891b2;
+  --gray-50: #f0fdfa;
+  --gray-100: #ccfbf1;
+  --gray-900: #0f172a;
+  --white: #f0fdfa;
+  --brand-gradient: linear-gradient(90deg, #0ea5e9 0%, #22d3ee 100%);
+  --background: #f0fdfa;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+} 

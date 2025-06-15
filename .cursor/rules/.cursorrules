@@ -1,0 +1,559 @@
+# Softics Studio Website - Cursor Rules
+
+## Project Overview
+Softics is a solo AI development studio creating "intelligent tools, thoughtful systems, and cultural code." This Next.js website serves as both a professional portfolio and experimental platform, balancing credibility with innovation.
+
+## Brand Identity & Design System
+
+### Core Values (Reflect in Code)
+- **Craft**: Precision in every pixel - clean, maintainable code
+- **Culture**: Thoughtful user experience with cultural context
+- **Curiosity**: Always exploring - experimental features encouraged
+- **Code**: Elegant solutions - prefer readable over clever
+
+### Color Palette
+```css
+/* Primary Colors */
+--purple-primary: #8B5CF6    /* Main brand purple */
+--purple-light: #A78BFA      /* Hover states, accents */
+--purple-dark: #7C3AED       /* Active states, emphasis */
+
+/* Accent Colors */
+--saffron-orange: #FF9933     /* Call-to-action, highlights */
+--saffron-light: #FFB366      /* Hover states for orange elements */
+--saffron-dark: #E6851A       /* Active orange states */
+
+/* Neutrals */
+--gray-50: #F9FAFB
+--gray-100: #F3F4F6
+--gray-900: #111827
+--white: #FFFFFF
+```
+
+### Typography Hierarchy
+- **Hero**: 3xl-6xl, font-bold, tracking-tight
+- **Headings**: xl-3xl, font-semibold
+- **Body**: base-lg, font-normal, leading-relaxed
+- **Captions**: sm, font-medium, text-gray-600
+
+## Technical Stack & Conventions
+
+### Framework & Tools
+- **Next.js 14+** with App Router (not Pages Router)
+@
+- **TypeScript** - strict mode enabled 
+@TypeScript
+- **Tailwind CSS** - utility-first approach
+
+- **Framer Motion** - for all animations (60fps target)
+- **shadcn/ui** - component library base
+- **Three.js** - for Sri 3D avatar (future integration)
+
+### Documentation Tags & References
+#### Core Framework
+```typescript 
+/**
+ * @framework Next.js
+ * @docs https://nextjs.org/docs
+ * @version 14+
+ * @features
+ * - App Router
+ * - Server Components
+ * - Image Optimization
+ * - API Routes
+ * @usage
+ * - Use app/ directory for routing
+ * - Implement Server Components by default
+ * - Use Client Components only when necessary
+ */
+```
+
+#### Type System
+```typescript
+/**
+ * @framework TypeScript
+ * @docs https://www.typescriptlang.org/docs
+ * @version 5.0+
+ * @features
+ * - Strict Mode
+ * - Type Inference
+ * - Interface Definitions
+ * - Generic Types
+ * - Union Types
+ * - Type Guards
+ * @usage
+ * - Define interfaces for all props
+ * - Use type inference where possible
+ * - Avoid 'any' type
+ * - Use strict mode
+ * - Leverage generics for reusable components
+ * - Implement proper type guards
+ */
+```
+
+#### Styling
+```typescript
+/**
+ * @framework Tailwind CSS
+ * @docs https://tailwindcss.com/docs
+ * @version 3.4+
+ * @features
+ * - Utility-First
+ * - JIT Compiler
+ * - Custom Plugins
+ * @usage
+ * - Use utility classes
+ * - Follow mobile-first approach
+ * - Use @apply sparingly
+ */
+```
+
+#### UI Components
+```typescript
+/**
+ * @library shadcn/ui
+ * @docs https://ui.shadcn.com
+ * @version Latest
+ * @features
+ * - Radix UI Primitives
+ * - Tailwind Integration
+ * - Accessibility
+ * @usage
+ * - Copy components to /components/ui
+ * - Customize via tailwind.config
+ * - Maintain accessibility
+ */
+```
+
+#### Animations
+```typescript
+/**
+ * @library Framer Motion
+ * @docs https://www.framer.com/motion
+ * @version Latest
+ * @features
+ * - 60fps Animations
+ * - Gesture Support
+ * - Variants
+ * @usage
+ * - Use motion components
+ * - Define variants for reuse
+ * - Optimize for performance
+ */
+```
+
+#### State Management
+```typescript
+/**
+ * @library React Hooks
+ * @docs https://react.dev/reference/react
+ * @features
+ * - useState
+ * - useEffect
+ * - useCallback
+ * @usage
+ * - Keep state local when possible
+ * - Use proper dependencies
+ * - Handle cleanup
+ */
+```
+
+#### Form Handling
+```typescript
+/**
+ * @library React Hook Form
+ * @docs https://react-hook-form.com
+ * @version 7.54+
+ * @features
+ * - Form Validation
+ * - Performance
+ * - TypeScript Support
+ * @usage
+ * - Use with zod for validation
+ * - Implement proper error handling
+ * - Follow accessibility guidelines
+ */
+```
+
+#### Icons
+```typescript
+/**
+ * @library Lucide Icons
+ * @docs https://lucide.dev
+ * @version 0.454+
+ * @features
+ * - Consistent Design
+ * - Customizable
+ * - Tree-shakeable
+ * @usage
+ * - Import only needed icons
+ * - Use consistent sizing
+ * - Maintain accessibility
+ */
+```
+
+#### Testing
+```typescript
+/**
+ * @framework Jest
+ * @docs https://jestjs.io/docs
+ * @features
+ * - Component Testing
+ * - Snapshot Testing
+ * - Mock Functions
+ * @usage
+ * - Test user interactions
+ * - Use proper assertions
+ * - Maintain test coverage
+ */
+```
+
+#### Performance
+```typescript
+/**
+ * @tool Lighthouse
+ * @docs https://developers.google.com/web/tools/lighthouse
+ * @targets
+ * - Performance: 90+
+ * - Accessibility: 90+
+ * - Best Practices: 90+
+ * @usage
+ * - Regular audits
+ * - Monitor Core Web Vitals
+ * - Optimize based on reports
+ */
+```
+
+#### Accessibility
+```typescript
+/**
+ * @standard WCAG
+ * @docs https://www.w3.org/WAI/standards-guidelines/wcag
+ * @level AA
+ * @requirements
+ * - Keyboard Navigation
+ * - Screen Reader Support
+ * - Color Contrast
+ * @usage
+ * - Use semantic HTML
+ * - Implement ARIA labels
+ * - Test with screen readers
+ */
+```
+
+### File Structure Conventions
+```
+/app
+  /components
+    /ui          # shadcn/ui components
+    /layout      # Navigation, Footer, etc.
+    /sections    # Homepage sections (Hero, Services, etc.)
+    /sri         # Sri AI assistant components
+  /lib
+    /utils.ts    # Utility functions
+    /constants.ts # Brand colors, animations
+  /styles
+    globals.css  # Tailwind imports + custom CSS
+```
+
+### Component Patterns
+
+#### Naming Conventions
+- **Components**: PascalCase (e.g., `ServiceCard.tsx`)
+- **Files**: kebab-case for non-components (e.g., `api-client.ts`)
+- **Props**: camelCase with TypeScript interfaces
+- **CSS Classes**: Tailwind utilities preferred over custom CSS
+
+#### Component Structure Template
+```tsx
+interface ComponentNameProps {
+  // Props with clear TypeScript types
+}
+
+export function ComponentName({ ...props }: ComponentNameProps) {
+  // State and hooks first
+  // Event handlers second
+  // Render logic last
+  
+  return (
+    <motion.div
+      // Framer Motion props for animations
+      className="tailwind-classes"
+    >
+      {/* JSX content */}
+    </motion.div>
+  )
+}
+```
+
+## Animation Guidelines
+
+### Framer Motion Standards
+- **Duration**: 0.2s for micro-interactions, 0.4s for page transitions
+- **Easing**: `ease-out` for entrances, `ease-in` for exits
+- **Performance**: Use `transform` and `opacity` for smooth 60fps
+- **Hover States**: Always include `whileHover` for interactive elements
+
+### Animation Patterns
+```tsx
+// Service Card Hover
+const cardHover = {
+  y: -4,
+  boxShadow: "0 10px 25px rgba(139, 92, 246, 0.15)",
+  borderColor: "#FF9933"
+}
+
+// Page Transitions
+const pageVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 }
+}
+```
+
+## Sri AI Assistant Integration
+
+### Future 3D Avatar Requirements
+- **Position**: Fixed bottom-right corner
+- **Size**: 80x80px default, expandable
+- **Behavior**: Subtle breathing animation, contextual reactions
+- **Performance**: 60fps target, LOD for performance
+
+### Command Bar System
+- **Trigger**: Press `/` anywhere on site
+- **Modal**: Center screen, glassmorphism background
+- **Context**: Sri responds as Softics co-founder
+- **State Management**: Zustand for Sri interactions
+
+## Code Quality Standards
+
+### TypeScript Usage
+- **Strict Mode**: Always enabled
+- **Interfaces**: Prefer over types for component props
+- **Generics**: Use for reusable components
+- **No Any**: Avoid `any` type - use proper typing
+
+### Performance Guidelines
+- **Images**: Always use Next.js Image component with proper sizing
+- **Animations**: Use `transform` and `opacity` for GPU acceleration
+- **Lazy Loading**: Implement for below-fold content
+- **Bundle Size**: Monitor with `@next/bundle-analyzer`
+
+### Accessibility Requirements
+- **Semantic HTML**: Proper heading hierarchy (h1 → h6)
+- **ARIA Labels**: For interactive elements and complex UI
+- **Keyboard Navigation**: Tab order and focus management
+- **Color Contrast**: WCAG AA compliance (4.5:1 minimum)
+- **Alt Text**: Descriptive alt text for all images
+
+## Content & Messaging Guidelines
+
+### Tone of Voice
+- **Professional yet Approachable**: Technical expertise without jargon
+- **Experimental**: Showcase innovation and curiosity
+- **Human-Centered**: AI augments human creativity, doesn't replace it
+- **Cultural Awareness**: Global perspective, local context
+
+### Copy Principles
+- **Clarity**: Simple, direct language
+- **Specificity**: Concrete examples over abstract concepts
+- **Action-Oriented**: Clear CTAs and next steps
+- **Value-Focused**: What problems we solve, not just what we build
+
+## Development Workflow
+
+### Git Conventions
+- **Commits**: Conventional commits (feat:, fix:, style:, refactor:)
+- **Branches**: feature/component-name, fix/issue-description
+- **PRs**: Self-reviewing before merge
+
+### Testing Approach
+- **Components**: Test user interactions, not implementation
+- **Accessibility**: Automated testing with jest-axe
+- **Performance**: Lighthouse scores (90+ target)
+- **Cross-Browser**: Chrome, Firefox, Safari testing
+
+### Deployment Pipeline
+- **Staging**: Vercel preview deployments for all PRs
+- **Production**: Main branch auto-deploys to softics.com
+- **Monitoring**: Error tracking and performance monitoring
+
+## Sri-Specific Guidelines
+
+### Character Consistency
+- **Personality**: Knowledgeable co-founder, slightly playful but professional
+- **Knowledge**: Deep understanding of Softics services and philosophy
+- **Limitations**: Honest about what AI can/cannot do
+- **Cultural Sensitivity**: Globally aware, respectful communication
+
+### Technical Integration
+- **API Calls**: OpenAI GPT-4 for Sri responses
+- **Context**: Maintain conversation history within session
+- **Privacy**: No persistent storage of user conversations
+- **Performance**: Response time under 3 seconds
+
+## Common Patterns to Follow
+
+### Responsive Design
+```tsx
+// Mobile-first approach
+className="text-sm md:text-base lg:text-lg"
+className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+```
+
+### Error Handling
+```tsx
+// Always handle loading and error states
+{isLoading && <LoadingSpinner />}
+{error && <ErrorMessage message={error} />}
+{data && <DataComponent data={data} />}
+```
+
+### Form Handling
+```tsx
+// Use react-hook-form for all forms
+const { register, handleSubmit, formState: { errors } } = useForm()
+```
+
+## Cursor-Specific Instructions
+
+### Preferred Responses
+- **Multi-file Changes**: Use Composer (Cmd+K) for system-wide updates
+- **Component Creation**: Follow the component template above
+- **Animation Implementation**: Always use Framer Motion with performance in mind
+- **Accessibility**: Include ARIA labels and semantic HTML automatically
+
+### Code Generation Preferences
+- **Verbose Comments**: Explain complex logic, especially animations
+- **Type Safety**: Generate proper TypeScript interfaces
+- **Performance First**: Optimize for Core Web Vitals
+- **Consistency**: Match existing patterns in the codebase
+
+### Error Prevention
+- **Import Statements**: Always include proper imports
+- **Dependencies**: Check package.json before suggesting new packages
+- **Version Compatibility**: Ensure Next.js 14+ compatibility
+- **Build Errors**: Consider TypeScript and ESLint warnings
+
+## Project-Specific Context
+
+This website represents Paras (founder) and Softics studio's unique position in the AI development space - professional enough for enterprise clients, experimental enough to showcase innovation. Every code decision should reflect this balance.
+
+The site is both a portfolio and a platform - it needs to convert potential clients while also serving as a testing ground for new AI interaction patterns, particularly with the Sri integration.
+
+Remember: We're building the future of human-AI collaboration, starting with this website.
+
+#### TailwindCSS
+```typescript
+/**
+ * @framework TailwindCSS
+ * @docs https://tailwindcss.com/docs
+ * @version 3.4+
+ * @features
+ * - Utility-First CSS
+ * - JIT Compiler
+ * - Custom Plugins
+ * - Responsive Design
+ * - Dark Mode
+ * - Custom Configuration
+ * @usage
+ * - Use utility classes
+ * - Follow mobile-first approach
+ * - Use @apply sparingly
+ * - Leverage custom plugins
+ * - Implement dark mode
+ * - Use custom configuration
+ */
+```
+
+#### Next.js
+```typescript
+/**
+ * @framework Next.js
+ * @docs https://nextjs.org/docs
+ * @version 14+
+ * @features
+ * - App Router
+ * - Server Components
+ * - Image Optimization
+ * - API Routes
+ * - Static Generation
+ * - Server-Side Rendering
+ * @usage
+ * - Use app/ directory for routing
+ * - Implement Server Components by default
+ * - Use Client Components only when necessary
+ * - Optimize images with next/image
+ * - Leverage API routes for backend functionality
+ * - Use proper data fetching methods
+ */
+```
+
+#### Framer Motion
+```typescript
+/**
+ * @library Framer Motion
+ * @docs https://www.framer.com/motion
+ * @version Latest
+ * @features
+ * - 60fps Animations
+ * - Gesture Support
+ * - Variants
+ * - Layout Animations
+ * - Exit Animations
+ * - Motion Values
+ * @usage
+ * - Use motion components
+ * - Define variants for reuse
+ * - Optimize for performance
+ * - Implement gesture controls
+ * - Use layout animations
+ * - Handle exit animations
+ */
+```
+
+#### Shadcn
+```typescript
+/**
+ * @library shadcn/ui
+ * @docs https://ui.shadcn.com
+ * @version Latest
+ * @features
+ * - Radix UI Primitives
+ * - Tailwind Integration
+ * - Accessibility
+ * - Customizable Components
+ * - Dark Mode Support
+ * - TypeScript Support
+ * @usage
+ * - Copy components to /components/ui
+ * - Customize via tailwind.config
+ * - Maintain accessibility
+ * - Use proper component composition
+ * - Implement dark mode
+ * - Follow TypeScript best practices
+ */
+```
+
+#### Three.js
+```typescript
+/**
+ * @library Three.js
+ * @docs https://threejs.org/docs
+ * @version Latest
+ * @features
+ * - 3D Graphics
+ * - WebGL Rendering
+ * - Scene Management
+ * - Camera Controls
+ * - Lighting
+ * - Materials
+ * @usage
+ * - Use for 3D visualizations
+ * - Implement proper scene management
+ * - Optimize performance
+ * - Handle camera controls
+ * - Use appropriate lighting
+ * - Apply proper materials
+ */
+```

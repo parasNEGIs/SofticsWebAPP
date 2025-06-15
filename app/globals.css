@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Main Theme Colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 267 75% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 36 100% 50%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 267 75% 50%;
+    --radius: 0.75rem;
+
+    /* Labs Theme Colors */
+    --labs-background: 0 0% 0%;
+    --labs-foreground: 0 0% 98%;
+    --labs-primary: 36 100% 50%;
+    --labs-primary-foreground: 0 0% 98%;
+    --labs-secondary: 240 3.7% 15.9%;
+    --labs-secondary-foreground: 0 0% 98%;
+    --labs-muted: 240 3.7% 15.9%;
+    --labs-muted-foreground: 240 5% 64.9%;
+    --labs-accent: 36 100% 60%;
+    --labs-accent-foreground: 0 0% 98%;
+    --labs-border: 240 3.7% 15.9%;
+    --labs-ring: 142 76% 36%;
+
+    /* Custom Colors */
+    --purple-primary: 267 75% 50%;
+    --purple-light: 267 75% 60%;
+    --purple-dark: 267 75% 40%;
+    --saffron-orange: 36 100% 50%;
+    --saffron-light: 36 100% 60%;
+    --saffron-dark: 36 100% 40%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 267 75% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 36 100% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 267 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Labs Theme */
+.labs-theme {
+  --background: var(--labs-background);
+  --foreground: var(--labs-foreground);
+  --primary: var(--labs-primary);
+  --primary-foreground: var(--labs-primary-foreground);
+  --secondary: var(--labs-secondary);
+  --secondary-foreground: var(--labs-secondary-foreground);
+  --muted: var(--labs-muted);
+  --muted-foreground: var(--labs-muted-foreground);
+  --accent: var(--labs-accent);
+  --accent-foreground: var(--labs-accent-foreground);
+  --border: var(--labs-border);
+  --ring: var(--labs-ring);
+}
+
+/* Labs Gradient Background */
+.labs-gradient-bg {
+  background: radial-gradient(circle at 50% 50%, hsl(var(--labs-primary) / 0.15), transparent 70%);
+}
+
+/* Typing Animation */
+.typing-animation {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end);
+  border-right: 2px solid hsl(var(--primary));
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.15), rgba(255, 255, 255, 0) 70%);
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 2px;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  transition: width 0.2s ease;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glass Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary-light));
+}
+
+/* Labs theme overrides */
+.theme-labs {
+  --primary: #FF9933;          /* saffron text/icons */
+  --primary-foreground: #ffffff;
+}
