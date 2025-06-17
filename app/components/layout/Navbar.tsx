@@ -93,6 +93,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
   const initialSite = pathname?.startsWith('/labs') ? 'Softics Labs' : 'Softics Studio';
 
   const [selectedOption, setSelectedOption] = useState<string>(initialSite);
+  const isLabs = selectedOption === 'Softics Labs';
   const { theme, setTheme } = useTheme();
 
   // Sync theme with site on mount
@@ -196,11 +197,11 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                           fill
                           className="object-contain"
                           priority
-                          style={theme === 'labs' ? { filter: 'hue-rotate(160deg) brightness(1.1)' } : {}}
+                          style={theme === 'labs' ? { filter: 'sepia(1) saturate(12) hue-rotate(-15deg) brightness(1) contrast(1.6)' } : {}}
                         />
                       </div>
                       <div className="flex items-center">
-                        <span className="text-xl font-bold bg-gradient-to-r from-[#FF9933] to-[#FFB366] bg-clip-text text-transparent ml-2 truncate w-[120px] block">
+                        <span className="hidden">
                           {selectedOption}
                         </span>
                         <motion.button
@@ -208,7 +209,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                           aria-label="Open Softics Switcher"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
-                          className="p-1 text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200 ml-1 focus:outline-none"
+                          className={isLabs ? 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200' : 'text-[color:var(--purple-primary)] hover:text-[#A78BFA] transition-colors duration-200'} 
                           style={{ pointerEvents: 'none' }} // disables click, hover only
                         >
                           <svg
@@ -262,26 +263,21 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                              )}
                            >
                             <div
-                              className="flex-shrink-0 mr-4 rounded-full p-2"
+                              className="flex-shrink-0 mr-4 rounded-full p-2" 
                               style={{ backgroundImage: option.name === 'Softics Labs'
-                                ? 'linear-gradient(90deg, #FF9933 0%, #FFB366 100%)'
-                                : 'linear-gradient(90deg, #FF9933 0%, #FFB366 100%)' }}
+                                ? 'linear-gradient(90deg,#FF9933 0%,#000000 100%)'
+                                : 'linear-gradient(90deg,#8B5CF6 0%,#A78BFA 100%)' }}
                             >
                               {React.cloneElement(option.icon, { className: 'w-5 h-5 text-white' })}
                             </div>
                             <div className="flex-1 text-left">
-                              <span
-                                className="font-semibold text-base bg-clip-text text-transparent"
-                                style={{ backgroundImage: option.name === 'Softics Labs'
-                                  ? 'linear-gradient(90deg, #FF9933 0%, #FFB366 100%)'
-                                  : 'linear-gradient(90deg, #FF9933 0%, #FFB366 100%)' }}
-                              >
-                                {option.name}
-                              </span>
+                              <span className={option.name === 'Softics Labs'
+                                  ? 'font-semibold text-base bg-clip-text text-transparent bg-gradient-to-r from-[#FF9933] to-black'
+                                  : 'font-semibold text-base text-[#8B5CF6]'}>{option.name}</span>
                               <div className="text-xs text-gray-500 mt-1">{option.description}</div>
                             </div>
                             {selectedOption === option.name && (
-                              <svg className="w-5 h-5 text-[#FF9933] ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                              <svg className={`w-5 h-5 ml-2 ${option.name === 'Softics Labs' ? 'text-[#FF9933]' : 'text-[#8B5CF6]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                             )}
                           </motion.button>
                          ))}
@@ -306,21 +302,20 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                         onClick={(e) => handleSmoothScroll(e, item.href)}
                         className={cn(
                           'relative text-sm font-medium transition-colors duration-200',
-                          'text-[#FF9933] hover:text-[#FFB366]',
-                          activeSection === item.href.substring(1) && 'text-[#FF9933]'
-                        )}
-                      >
-                        {item.name}
-                        {activeSection === item.href.substring(1) && (
-                          <motion.div
-                            layoutId="activeSection"
-                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FF9933]"
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                          />
-                        )}
-                      </Link>
-                    </motion.div>
-                  ))}
+                          isLabs ? 'text-[#FF9933] hover:text-[#FFB366]' : 'text-[color:var(--purple-primary)] hover:text-[#A78BFA]',
+                           activeSection === item.href.substring(1) ? (isLabs ? 'text-[#FF9933]' : 'text-[color:var(--purple-primary)]') : ''
+                         )}>
+                         {item.name}
+                         {activeSection === item.href.substring(1) && (
+                           <motion.div
+                             layoutId="activeSection"
+                             className={`absolute -bottom-1 left-0 right-0 h-0.5 ${isLabs ? 'bg-[#FF9933]' : 'bg-[color:var(--purple-primary)]'}`}
+                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                           />
+                         )}
+                       </Link>
+                     </motion.div>
+                   ))}
                 </div>
               </nav>
 
@@ -344,7 +339,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={theme === 'labs' ? 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200' : 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200'}
+                      className={isLabs ? 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200' : 'text-[color:var(--purple-primary)] hover:text-[#A78BFA] transition-colors duration-200'}
                     >
                       <span className="sr-only">{social.name}</span>
                       {social.icon}
@@ -423,7 +418,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                             rel="noopener noreferrer"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className={theme === 'labs' ? 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200' : 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200'}
+                            className={isLabs ? 'text-[#FF9933] hover:text-[#FFB366] transition-colors duration-200' : 'text-[color:var(--purple-primary)] hover:text-[#A78BFA] transition-colors duration-200'}
                           >
                             <span className="sr-only">{social.name}</span>
                             {social.icon}
