@@ -22,7 +22,7 @@ export function LabsHero() {
   const theme = getThemeClasses('labs')
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Gradient Background */}
       {/* Diagonal saffron gradient */}
       <div
@@ -38,7 +38,7 @@ export function LabsHero() {
       
       <div className={theme.container}>
         <motion.div 
-          className="flex flex-col items-center text-center space-y-10"
+          className="relative z-10 flex flex-col items-center text-center space-y-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -55,7 +55,7 @@ export function LabsHero() {
             
             <motion.p 
               className={cn(
-                "text-2xl md:text-3xl text-[color:var(--saffron-orange)]",
+                "text-2xl md:text-3xl text-white drop-shadow-[0_0_10px_rgba(255,153,51,0.6)]",
                 typingComplete ? "opacity-100" : "opacity-0"
               )}
               initial={{ opacity: 0 }}
@@ -84,11 +84,12 @@ export function LabsHero() {
           >
             <Button 
               size="lg" 
-              className={cn("gap-2 group transition-transform", theme.button)}
+              className="transition-transform"
               asChild
             >
               <motion.a 
                 href="#experiments"
+                className="gap-2 group bg-[#FF9933] hover:bg-[#E6851A] text-black shadow-md border border-[#FFA07A]"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -99,12 +100,12 @@ export function LabsHero() {
             
             <Button 
               size="lg" 
-              
-              className={cn("gap-2 group transition-transform", theme.button)}
+              className="transition-transform"
               asChild
             >
               <motion.a 
-                href="#join"
+                href="#suggest"
+                className="gap-2 group bg-[#FF9933] hover:bg-[#E6851A] text-black shadow-md border border-[#FFA07A]"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

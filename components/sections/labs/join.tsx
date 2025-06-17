@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -14,7 +15,7 @@ export function SuggestionsSection() {
     <section id="suggest" className="py-24">
       <div className="container mx-auto px-4 md:px-6 max-w-xl">
         <motion.h2
-          className="text-4xl md:text-5xl font-extrabold mb-6 text-white text-center"
+          className="text-4xl md:text-5xl font-extrabold mb-6 text-[#FF9933] text-center drop-shadow-[0_0_4px_rgba(255,153,51,0.9)]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -51,9 +52,15 @@ export function SuggestionsSection() {
             <label className="text-sm font-medium text-gray-300">Suggestion <span className="text-red-500">*</span></label>
             <Textarea placeholder="Share your idea or feedback" className="min-h-[120px] bg-transparent border border-white/30 focus:border-[color:var(--saffron-orange)] focus:ring-0 text-white placeholder-gray-500" required />
           </div>
-          <Button type="submit" className={theme.button}>
-            Send Suggestion <ArrowRight className="h-4 w-4 ml-1" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button type="submit" className="bg-[#FF9933] hover:bg-[#E6851A] text-black gap-2 order-2 sm:order-1">
+              Send Suggestion <ArrowRight className="h-4 w-4 ml-1" />
+            </Button>
+            <Link href="/labs/join" className="order-1 sm:order-2 inline-flex items-center gap-2 bg-transparent border border-[#FF9933] hover:bg-[#FF9933]/20 text-[#FF9933] hover:text-black font-medium rounded-md px-6 py-2 transition-colors">
+              <span>Join the Lab</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </motion.form>
       </div>
     </section>

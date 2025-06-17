@@ -1,9 +1,9 @@
-import { SimpleNavBar } from "@/components/simple-navbar"
+import { Navbar, type NavItem } from "../components/layout/Navbar"
 
 export default function PrivacyLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <SimpleNavBar />
+      <Navbar items={[{ name: 'Home', href: '/' } as NavItem]} />
       {children}
     </>
   )

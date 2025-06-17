@@ -6,14 +6,21 @@
 
 import { Navbar } from '@/app/components/layout/Navbar'
 import type { NavItem } from '@/app/components/layout/Navbar'
-
-const labsNavItems: NavItem[] = [
-  { name: 'Home', href: '#home' },
-  { name: 'Experiments', href: '#experiments' },
-  { name: 'Articles/Blogs', href: '/blogs' },
-  { name: 'Sri', href: '/labs/sri' },
-]
+import { usePathname } from 'next/navigation'
 
 export function LabsNavbar() {
-  return <Navbar items={labsNavItems} />
+  const pathname = usePathname()
+  const isSubPage = ['/labs/experiments', '/labs/experiments/sri', '/labs/join'].some(p => pathname?.startsWith(p))
+
+  const items: NavItem[] = isSubPage
+    ? [{ name: 'Home', href: '/labs#home' }]
+    : [
+        { name: 'Home', href: '#home' },
+        { name: 'Experiments', href: '#experiments' },
+        { name: 'Sri', href: '#sri' },
+        { name: 'Suggestion', href: '#suggest' },
+        { name: 'Blogs', href: '/blogs' },
+      ]
+
+  return <Navbar items={items} />
 }

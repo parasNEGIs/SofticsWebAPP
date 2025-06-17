@@ -5,43 +5,25 @@ import { motion } from "framer-motion"
 
 // metadata handled at route level
 
-// This will be replaced with actual blog data from CMS
-const posts = [
-  {
-    title: "The Future of Human-AI Collaboration",
-    description: "Exploring how AI can augment human creativity and productivity",
-    date: "2024-03-15",
-    category: "AI",
-    slug: "future-of-human-ai-collaboration",
-  },
-  {
-    title: "Building Cultural Intelligence in AI Systems",
-    description: "Why understanding cultural context is crucial for AI development",
-    date: "2024-03-10",
-    category: "Culture",
-    slug: "cultural-intelligence-in-ai",
-  },
-  {
-    title: "The Art of Thoughtful System Design",
-    description: "Principles for creating systems that serve both users and society",
-    date: "2024-03-05",
-    category: "Design",
-    slug: "thoughtful-system-design",
-  },
-]
+import { allBlogs } from 'contentlayer/generated'
+import { compareDesc, parseISO } from 'date-fns'
+const posts = [...allBlogs].sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date)))
 
-const categories = [
-  { name: "AI", count: 5 },
-  { name: "Culture", count: 3 },
-  { name: "Design", count: 4 },
-  { name: "Development", count: 6 },
-]
+const categoryMap = posts.reduce((map, post) => {
+  if (post.category) {
+    map.set(post.category, (map.get(post.category) ?? 0) + 1);
+  }
+  return map;
+}, new Map<string, number>());
+
+const categories = Array.from(categoryMap, ([name, count]) => ({ name, count }));
+
 
 export default function BlogsPage() {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="text-center space-y-4">
+      <section className="text-center space-y-4 pt-24 md:pt-28">
         <motion.h1 
           className="text-4xl md:text-6xl font-bold tracking-tight"
           initial={{ opacity: 0, y: 20 }}
@@ -76,7 +58,7 @@ export default function BlogsPage() {
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <span>{post.date}</span>
                     <span>•</span>
-                    <span>{post.category}</span>
+                    <span>{post.category ?? 'General'}</span>
                   </div>
                   <h2 className="text-2xl font-semibold group-hover:text-primary transition-colors">
                     {post.title}

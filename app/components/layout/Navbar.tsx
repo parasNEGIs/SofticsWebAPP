@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { ModeToggle } from '@/components/mode-toggle';
 import React from 'react';
 import { useTheme } from '../../lib/theme-context';
 import { useRouter, usePathname } from 'next/navigation';
@@ -125,7 +126,9 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
       setLastScrollY(currentScrollY);
       
       // Update active section based on scroll position
-      const sections = items.map(item => item.href.substring(1));
+      const sections = items
+        .filter(item => item.href.includes('#'))
+        .map(item => item.href.split('#')[1]);
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -179,7 +182,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
           )}>
             <div className="flex items-center justify-between max-w-[1600px] mx-auto">
               {/* Logo and Dropdown */}
-              <div className="w-[220px] min-w-[220px] max-w-[220px] -ml-8">
+              <div className="w-[220px] min-w-[220px] max-w-[220px] ml-0">
                 <div
                   className="flex items-center relative"
                   onMouseEnter={() => setIsDropdownOpen(true)}
@@ -190,7 +193,7 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <div className="relative w-8 h-8">
+                      <div className="relative w-8 h-8 drop-shadow-md">
                         <Image
                           src="/logo.svg"
                           alt="Softics Logo"
@@ -301,12 +304,12 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                         href={item.href}
                         onClick={(e) => handleSmoothScroll(e, item.href)}
                         className={cn(
-                          'relative text-sm font-medium transition-colors duration-200',
+                          'relative text-sm font-bold transition-colors duration-200',
                           isLabs ? 'text-[#FF9933] hover:text-[#FFB366]' : 'text-[color:var(--purple-primary)] hover:text-[#A78BFA]',
-                           activeSection === item.href.substring(1) ? (isLabs ? 'text-[#FF9933]' : 'text-[color:var(--purple-primary)]') : ''
+                           (item.href.startsWith('#') ? activeSection === item.href.substring(1) : pathname === item.href) ? (isLabs ? 'text-[#FF9933]' : 'text-[color:var(--purple-primary)]') : ''
                          )}>
                          {item.name}
-                         {activeSection === item.href.substring(1) && (
+                         {(item.href.startsWith('#') ? activeSection === item.href.substring(1) : pathname === item.href) && (
                            <motion.div
                              layoutId="activeSection"
                              className={`absolute -bottom-1 left-0 right-0 h-0.5 ${isLabs ? 'bg-[#FF9933]' : 'bg-[color:var(--purple-primary)]'}`}
@@ -325,11 +328,12 @@ export function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-4 py-2 rounded-full text-white transition-colors duration-200 shadow-md hover:brightness-110"
-                  style={{ backgroundImage: 'var(--brand-gradient)' }}
+                  style={{ backgroundImage: isLabs ? 'linear-gradient(90deg, #FF9933 0%, #FFB366 100%)' : 'var(--brand-gradient,linear-gradient(90deg, #8B5CF6 0%, #FF9933 100%))' }}
                   onClick={(e) => handleSmoothScroll(e, '#contact')}
                 >
                   Contact
                 </motion.button>
+                <ModeToggle />
                 <div className="flex items-center space-x-4">
                   {socialLinks.map((social) => (
                     <motion.a

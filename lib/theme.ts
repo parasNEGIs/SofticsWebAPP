@@ -32,8 +32,8 @@ export function getThemeClasses(domain: Domain): ThemeClasses {
       link: "text-purple-500 hover:text-purple-600"
     },
     labs: {
-      heading: "text-[color:var(--saffron-orange)]",
-      button: "bg-[color:var(--saffron-orange)] hover:bg-[color:var(--saffron-dark)] text-white",
+      heading: "text-[#FF9933]",
+      button: "bg-[color:var(--saffron-orange)] hover:bg-[color:var(--saffron-dark)] text-black",
       subheading: "text-gray-300",
       link: "text-[color:var(--saffron-orange)] hover:text-[color:var(--saffron-dark)]"
     },

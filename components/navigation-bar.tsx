@@ -8,13 +8,12 @@ import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { usePathname, useRouter } from "next/navigation"
 
-const navItems = [
+const navItems: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
-  { name: "Labs", href: "/#projects" },
-  { name: "Sri", href: "/#sri" },
-  { name: "Contact", href: "/#contact" },
-]
+  { name: "Studios", href: "/studio" },
+  { name: "Labs", href: "/labs" },
+  { name: "About us", href: "/about" },
+];
 
 export function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,28 +32,9 @@ export function NavigationBar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
-    if (href === "/") {
-      setIsOpen(false)
-      return
-    }
-    if (href.startsWith("/#")) {
-      e.preventDefault()
-      const hash = href.replace("/", ""); // e.g. '#services'
-      if (pathname === "/") {
-        // On homepage, smooth scroll
-        const targetId = hash.replace("#", "");
-        const element = document.getElementById(targetId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-        setIsOpen(false)
-      } else {
-        // On other pages, always navigate to homepage with hash
-        router.push(`/${hash}`)
-        setIsOpen(false)
-      }
-    }
+  // Close mobile menu after navigation
+  const handleMobileNavClick = () => {
+    setIsOpen(false);
   }
 
   return (
@@ -73,7 +53,6 @@ export function NavigationBar() {
                   "text-sm font-medium transition-colors hover:text-primary",
                   pathname === item.href ? "text-primary" : "text-muted-foreground",
                 )}
-                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
               </Link>
@@ -98,7 +77,7 @@ export function NavigationBar() {
                   "text-sm font-medium transition-colors hover:text-primary",
                   pathname === item.href ? "text-primary" : "text-muted-foreground",
                 )}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={handleMobileNavClick}
               >
                 {item.name}
               </Link>
@@ -106,7 +85,7 @@ export function NavigationBar() {
           </nav>
         </div>
       )}
-      <div className="progress-bar" style={{ width: `${scrollProgress}%` }} />
+      <div className="progress-bar pointer-events-none fixed bottom-0 left-0 h-0.5 bg-primary" style={{ width: `${scrollProgress}%` }} />
     </header>
   )
 }

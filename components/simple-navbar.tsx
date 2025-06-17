@@ -74,7 +74,7 @@ export function SimpleNavBar() {
         </div>
         {/* Center: Home link */}
         <div className="flex-1 flex justify-center">
-          <Link href="/" className="font-bold text-xl text-primary hover:text-primary/80 transition-colors">
+          <Link href="/" className="font-bold text-xl text-[color:var(--purple-primary)] hover:text-[#A78BFA] transition-colors">
             Home
           </Link>
         </div>
@@ -83,7 +83,7 @@ export function SimpleNavBar() {
           <Link href="/#contact">
             <button
               className="px-4 py-2 rounded-full text-white transition-colors duration-200 shadow-md hover:brightness-110 font-medium"
-              style={{ backgroundImage: 'var(--brand-gradient)' }}
+              style={{ backgroundImage: 'var(--brand-gradient, linear-gradient(90deg, #8B5CF6 0%, #FF9933 100%))' }}
             >
               Contact
             </button>

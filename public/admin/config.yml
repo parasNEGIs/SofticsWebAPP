@@ -1,0 +1,36 @@
+backend:
+  name: github
+  repo: youruser/softics
+  branch: main
+  open_authoring: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    format: "mdx"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title }
+      - { name: date, label: Date, widget: datetime }
+      - { name: description, label: Summary }
+      - { name: tags, label: Tags, widget: list }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: "experiment"
+    label: "Experiments"
+    folder: "content/experiments"
+    format: "mdx"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title }
+      - { name: status, label: Status, widget: select, options: [concept, alpha, beta, live] }
+      - { name: repoUrl, label: "Repo URL" }
+      - { name: demoUrl, label: "Live Demo URL" }
+      - { name: tags, label: Tags, widget: list }
+      - { name: body, label: Body, widget: markdown }

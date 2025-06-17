@@ -1,5 +1,9 @@
+'use client'
+
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import Estimator from "@/components/estimator"
+
 import { getThemeClasses } from "@/lib/theme"
 import { Domain } from "@/lib/theme"
 import { Button } from "@/components/ui/button"
@@ -11,7 +15,15 @@ interface ContactSectionProps {
 }
 
 export function ContactSection({ domain }: ContactSectionProps) {
+
   const theme = getThemeClasses(domain)
+  const packages = domain === 'studio'
+    ? [
+        { name: 'Prototype Sprint', price: '$4k', description: '1–2 weeks – rapid proof-of-concept.' },
+        { name: 'MVP Build', price: 'from $12k', description: '4–8 weeks – production-ready core product.' },
+        { name: 'AI Partnership', price: '$3k/mo', description: 'Ongoing roadmap, monitoring & improvements.' },
+      ]
+    : []
 
   const contactContent = {
     studio: {
@@ -47,7 +59,7 @@ export function ContactSection({ domain }: ContactSectionProps) {
   }[domain]
 
   return (
-    <section id="contact" className="py-24 bg-background">
+    <section id="contact" className="relative py-24 bg-background border-y border-border">
       <div className={theme.container}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,7 +74,32 @@ export function ContactSection({ domain }: ContactSectionProps) {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             {contactContent.description}
           </p>
+
+          {domain === 'studio' && <Estimator />}
+
         </motion.div>
+
+        {packages.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+          >
+            {packages.map((pkg) => (
+              <motion.div
+                key={pkg.name}
+                whileHover={{ scale: 1.05 }}
+                className="border border-border rounded-xl p-6 bg-muted/40 backdrop-blur-sm"
+              >
+                <h3 className="text-xl font-semibold mb-2">{pkg.name}</h3>
+                <p className="text-2xl font-bold text-[color:var(--purple-primary)] mb-1">{pkg.price}</p>
+                <p className="text-muted-foreground text-sm">{pkg.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,6 +137,16 @@ export function ContactSection({ domain }: ContactSectionProps) {
           </form>
         </motion.div>
       </div>
+
+      <motion.div
+        aria-hidden
+        className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 blur-3xl opacity-50 pointer-events-none"
+        initial={{ scale: 0.8, rotate: 0 }}
+        animate={{ scale: [0.8, 1.1, 0.8], rotate: [0, 360] }}
+        transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+        style={{ background: 'conic-gradient(var(--purple-primary), var(--saffron-orange), var(--purple-primary))' }}
+      />
+
     </section>
   )
 } 

@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
-const projects = [
+export const projects = [
   {
     title: "Intelligent Document Assistant",
     description: "AI-powered document analysis and question answering system",

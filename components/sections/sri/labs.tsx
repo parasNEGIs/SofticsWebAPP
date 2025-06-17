@@ -24,17 +24,17 @@ export function SriSection() {
             <h2 className={cn("text-3xl md:text-4xl font-bold", theme.heading)}>
               Meet Sri – Your AI Research Partner
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-white">
               Sri is an experimental conversational agent that helps you brainstorm ideas, explore code, and prototype AI solutions directly in the browser. Think of it as your on-call lab partner.
             </p>
-            <ul className="space-y-3 list-disc list-inside ml-1 text-muted-foreground">
+            <ul className="space-y-3 list-disc list-inside ml-1 text-white">
               <li>Explain ML papers in plain English</li>
               <li>Generate experiment blueprints</li>
               <li>Suggest tooling &amp; datasets</li>
             </ul>
 
             <Button size="lg" className={cn("gap-2 group", theme.button)} asChild>
-              <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.a href="/labs/experiments/sri" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 Try Sri <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
             </Button>
@@ -48,7 +48,7 @@ export function SriSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Bot className="h-24 w-24 text-[color:var(--saffron-orange)] animate-float" />
+            <Bot className="h-24 w-24 text-[#FF9933] drop-shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-float" />
           </motion.div>
         </motion.div>
       </div>
